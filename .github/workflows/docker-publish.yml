@@ -69,15 +69,18 @@ jobs:
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
         id: build-and-push
-        uses: docker/build-push-action@ac9327eae2b366085ac7f6a2d02df8aa8ead720a
-        with:
-          context: Docker
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
+        working-directory: Docker
+        run: |
+          echo ${GITHUB_REF#refs/*/}
+          echo ${{ github.ref_name }}
+          echo "$(git tag | sort --version-sort | tail -n1)"
+          echo "$(git rev-parse --short HEAD)" 
+          docker buildx build \
+              --platform linux/amd64,linux/arm64 \
+              --push \
+              --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+              --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.tag }}-"$(git rev-parse --short HEAD)" \
+              .
 
       # Sign the resulting Docker image digest except on PRs.
       # This will only write to the public Rekor transparency log when the Docker
