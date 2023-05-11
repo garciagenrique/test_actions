@@ -1,4 +1,4 @@
-FROM rucio/rucio-server:release-1.30.*
+FROM rucio/rucio-server:release-1.30.8
 
 # cleanup yum cache
 RUN yum upgrade -y \
