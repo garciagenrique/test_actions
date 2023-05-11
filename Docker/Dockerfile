@@ -1,9 +1,9 @@
-FROM rucio/rucio-server:release-1.30.0
+FROM rucio/rucio-server:release-1.30.8
 
 # cleanup yum cache
-#RUN yum upgrade -y \
-#    && yum clean all \
-#    && rm -rf /var/cache/yum
+RUN yum upgrade -y \
+    && yum clean all \
+    && rm -rf /var/cache/yum
 
 # install useful tools
 RUN yum install -y git htop wget voms-clients-cpp gfal2* python3-gfal2 a-certificates ca-policy-egi-core

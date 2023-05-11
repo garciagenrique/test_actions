@@ -79,7 +79,6 @@ jobs:
           cd .. && rm -rf test_actions
           export final_tag="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag}_${short-sha}"
           docker buildx build \
-              --platform linux/amd64,linux/arm64 \
               --push \
               --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
               --tag $final_tag \
