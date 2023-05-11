@@ -74,6 +74,8 @@ jobs:
         run: |
           echo {GITHUB_REF#refs/*/}: "${GITHUB_REF#refs/*/}"
           echo {{ github.ref_name }}: "${{ github.ref_name }}"
+          git clone https://github.com/garciagenrique/test_actions.git
+          cd test_actions
           echo tag: "$(git tag | sort --version-sort | tail -n1)"
           echo el tag: "$(git describe)"
           echo short-sha: "$(git rev-parse --short HEAD)" 
