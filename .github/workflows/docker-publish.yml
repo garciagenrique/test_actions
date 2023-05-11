@@ -82,5 +82,5 @@ jobs:
           docker buildx build \
               --push \
               --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-              --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag}_${short_sha} \
+              --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag} \
               .
