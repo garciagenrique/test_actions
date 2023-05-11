@@ -78,7 +78,7 @@ jobs:
           echo "short_sha=$(git rev-parse --short HEAD)" 
           cd .. && rm -rf test_actions
           export tag=$(git tag | sort --version-sort | tail -n1 | tr -d '.')
-          echo tag ${tag}
+          echo tag "${tag}"
           export short_sha=$(git rev-parse --short HEAD)
           docker buildx build \
               --push \
