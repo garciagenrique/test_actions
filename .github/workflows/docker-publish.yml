@@ -74,14 +74,14 @@ jobs:
         run: |
           git clone https://github.com/garciagenrique/test_actions.git
           cd test_actions
-          echo tag: "tag=$(git tag | sort --version-sort | tail -n1)"
-          echo short-sha: "short-sha=$(git rev-parse --short HEAD)" 
+          echo "tag=$(git tag | sort --version-sort | tail -n1)"
+          echo "short-sha=$(git rev-parse --short HEAD)" 
           cd .. && rm -rf test_actions
           docker buildx build \
               --platform linux/amd64,linux/arm64 \
               --push \
               --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-              --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$tag-$short-sha \
+              --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag}-${short-sha} \
               .
 
       # Sign the resulting Docker image digest except on PRs.
