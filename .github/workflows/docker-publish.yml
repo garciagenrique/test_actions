@@ -77,11 +77,12 @@ jobs:
           echo "tag=$(git tag | sort --version-sort | tail -n1)"
           echo "short-sha=$(git rev-parse --short HEAD)" 
           cd .. && rm -rf test_actions
+          export final_tag="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$"{tag}"-$"{short-sha}"
           docker buildx build \
               --platform linux/amd64,linux/arm64 \
               --push \
               --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
-              --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$"{tag}"-$"{short-sha}" \
+              --tag $final_tag \
               .
 
       # Sign the resulting Docker image digest except on PRs.
