@@ -1,8 +1,8 @@
 FROM rucio/rucio-server:release-1.30.0
 
 # cleanup yum cache
-RUN yum upgrade -y \
-    && yum clean all 
+#RUN yum upgrade -y \
+#    && yum clean all \
 #    && rm -rf /var/cache/yum
 
 # install useful tools
