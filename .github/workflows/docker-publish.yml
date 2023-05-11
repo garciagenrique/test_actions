@@ -66,6 +66,12 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+      # Get tag: dawidd6/action-get-tag@v1
+      - name: Get tag
+        id: tag
+        uses: dawidd6/action-get-tag@v1
+        run: echo "The tag is ${{ steps.tag.outputs.tag }}"
+
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
       - name: Build and push Docker image
