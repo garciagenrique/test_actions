@@ -4,6 +4,14 @@ name: Docker
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # github.repository as <account>/<repo>
+  DIR_NAME: test-actions
+  IMAGE_NAME: ${{ github.repository }}-{{ env.DIR_NAME }}
+  SCRIPT_NAME: docker-publish
+
 
 on:
 #   schedule:
@@ -11,14 +19,7 @@ on:
   push:
     paths:
       - Docker/**
-      - .github/workflows/docker-publish.yml
-
-env:
-  # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}-test-actions
-
+      - .github/workflows/{{ env.SCRIPT_NAME }}.yml
 
 jobs:
   build:
