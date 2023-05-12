@@ -76,17 +76,16 @@ jobs:
           cd test_actions
           echo "tag=$(git tag | sort --version-sort | tail -n1)"
           echo "short_sha=$(git rev-parse --short HEAD)" 
-          cd .. && rm -rf test_actions
-          export tag=$(git tag | sort --version-sort | tail -n1)
+          export the_tag=$(git tag | sort --version-sort | tail -n1)
           export short_sha=$(git rev-parse --short HEAD)
           echo ${{ env.REGISTRY }}
           echo ${{ env.IMAGE_NAME }}
-          echo ${tag}_${short_sha}
-          echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag}_${short_sha}
-          echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag}+${short_sha}
-          echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag}-${short_sha}
-          echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag}${short_sha}
-          
+          echo ${the_tag}_${short_sha}
+          echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}_${short_sha}
+          echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}+${short_sha}
+          echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}-${short_sha}
+          echo ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}${short_sha}
+          cd .. && rm -rf test_actions          
 #docker build . --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 
 #docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
 #docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${tag}_${short_sha}
