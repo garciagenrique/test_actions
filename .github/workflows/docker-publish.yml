@@ -19,7 +19,7 @@ on:
   push:
     paths:
       - Docker/**
-      - .github/workflows/{{ env.SCRIPT_NAME }}.yml
+      - .github/workflows/docker-publish.yml
 
 jobs:
   build:
