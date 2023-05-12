@@ -9,7 +9,8 @@ env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   DIR_NAME: test-actions
-  IMAGE_NAME: ${{ github.repository }}-{{ env.DIR_NAME }}
+  IMAGE_NAME: ${{ github.repository }}-${{ env.DIR_NAME }}
+  IMAGE_NAME_TEST: ${{ github.repository }}-$DIR_NAME
   SCRIPT_NAME: docker-publish
 
 
@@ -80,6 +81,8 @@ jobs:
           export the_tag=$(git tag | sort --version-sort | tail -n1)
           export short_sha=$(git rev-parse --short HEAD)
           cd ..
+          echo ${{ env.IMAGE_NAME }}
+          echo ${{ env.IMAGE_NAME_TEST }}
           docker build . --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 
           docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}_${short_sha}
