@@ -76,7 +76,7 @@ jobs:
           cd test_actions
           echo "tag=$(git tag | sort --version-sort | tail -n1)"
           echo "short_sha=$(git rev-parse --short HEAD)" 
-          export the_tag=$(git tag | sort --version-sort | tail -n1)
+          export the_tag=$(git tag | sort --version-sort | tail -n1 | tr -d '.')
           export short_sha=$(git rev-parse --short HEAD)
           cd ..
           docker build . --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 
