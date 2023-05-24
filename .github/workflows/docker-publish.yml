@@ -74,12 +74,20 @@ jobs:
         working-directory: Docker
         run: |
           echo first tests
-          echo "GIT_TAG=${{ steps.release_tag.outputs.version }}"
-          echo 'BASE_TAG="${{ github.repository_owner}}/"'
-          echo "GIT_TAG_COMMIT_SHA=$(echo $(git rev-list -n 1 $GIT_TAG))"
-          echo "GIT_MASTER_LATEST_COMMIT_SHA=$(echo $(git ls-remote --heads origin | grep master  |  awk -F '\t' '{print $1}'))"
+          GIT_TAG=${{ steps.release_tag.outputs.version }}
+          echo $GIT_TAG
+          BASE_TAG="${{ github.repository_owner}}/"
+          echo "BASE_TAG"
+          GIT_TAG_COMMIT_SHA=$(echo $(git rev-list -n 1 $GIT_TAG))
+          echo "GIT_TAG_COMMIT_SHA"
+          GIT_MASTER_LATEST_COMMIT_SHA=$(echo $(git ls-remote --heads origin | grep master  |  awk -F '\t' '{print $1}'))
+          echo "GIT_MASTER_LATEST_COMMIT_SHA"
+          echo "git_describe=$(git describe)"
           echo old tests
           git clone https://github.com/garciagenrique/test_actions.git
+          echo "git_describe=$(git describe)"
+          echo "git_describe=$(git describe | sed 's/-g/-/g')"
+          echo "git_describe=$(git describe --tags | sed 's/-g/-/g')"
           cd test_actions
           echo "tag=$(git tag | sort --version-sort | tail -n1)"
           echo "short_sha=$(git rev-parse --short HEAD)" 
