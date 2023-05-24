@@ -85,10 +85,12 @@ jobs:
           echo "git_describe=$(git describe)"
           echo old tests
           git clone https://github.com/garciagenrique/test_actions.git
+          cd test_actions          
+          
           echo "git_describe=$(git describe)"
           echo "git_describe=$(git describe | sed 's/-g/-/g')"
           echo "git_describe=$(git describe --tags | sed 's/-g/-/g')"
-          cd test_actions
+
           echo "tag=$(git tag | sort --version-sort | tail -n1)"
           echo "short_sha=$(git rev-parse --short HEAD)" 
           export the_tag=$(git tag | sort --version-sort | tail -n1)
