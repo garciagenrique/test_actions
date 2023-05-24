@@ -73,6 +73,12 @@ jobs:
         id: build-and-push
         working-directory: Docker
         run: |
+          echo first tests
+          echo "GIT_TAG=${{ steps.release_tag.outputs.version }}"
+          echo 'BASE_TAG="${{ github.repository_owner}}/"'
+          echo "GIT_TAG_COMMIT_SHA=$(echo $(git rev-list -n 1 $GIT_TAG))"
+          echo "GIT_MASTER_LATEST_COMMIT_SHA=$(echo $(git ls-remote --heads origin | grep master  |  awk -F '\t' '{print $1}'))"
+          echo old tests
           git clone https://github.com/garciagenrique/test_actions.git
           cd test_actions
           echo "tag=$(git tag | sort --version-sort | tail -n1)"
@@ -81,8 +87,8 @@ jobs:
           export short_sha=$(git rev-parse --short HEAD)
           cd ..
           echo ${{ env.IMAGE_NAME }}
-          docker build . --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}_${short_sha}
-          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}_${short_sha}
-          rm -rf test_actions          
+#          docker build . --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 
+#          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+#          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}_${short_sha}
+#          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}_${short_sha}
+#          rm -rf test_actions          
