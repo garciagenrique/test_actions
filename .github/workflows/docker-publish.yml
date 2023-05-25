@@ -95,6 +95,8 @@ jobs:
           echo "short_sha=$(git rev-parse --short HEAD)" 
           export the_tag=$(git tag | sort --version-sort | tail -n1)
           export short_sha=$(git rev-parse --short HEAD)
+          
+          echo $git_describe; echo $short_sha
           cd ..
           echo ${{ env.IMAGE_NAME }}
 #          docker build . --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest 
