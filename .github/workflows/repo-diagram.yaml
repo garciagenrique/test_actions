@@ -6,13 +6,10 @@ on:
       - main
       
 jobs:
-  create_diagram:
+  get_data:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@master
       - name: Update diagram
-        id: make_diagram
-        uses: githubocto/repo-visualizer@0.7.1
-        with:
-          output_file: "repo-diagram.svg"
+        uses: githubocto/repo-visualizer@main
