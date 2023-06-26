@@ -80,6 +80,8 @@ jobs:
           echo "var1=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
           echo output of var1 is $var1
           
+          echo  "var3=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+          
           echo "test {GITHUB_REF/refs\/tags\//}: ${GITHUB_REF/refs\/tags\//}"
           echo "var2=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
           echo output of var2 is $var2
@@ -128,4 +130,7 @@ jobs:
           echo "--------------"
           echo $var2
           echo ${{ steps.vars.outputs.var2 }} 
+          echo "--------------"
+          echo $var3
+          echo ${{ steps.vars.outputs.var3 }} 
       
