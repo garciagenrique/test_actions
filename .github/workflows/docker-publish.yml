@@ -75,11 +75,13 @@ jobs:
         working-directory: ${{ env.WORKDIR }}
         run: |
           echo "{GITHUB_REF} is ${GITHUB_REF}"
+          
           echo "test {GITHUB_REF#refs/*/}: ${GITHUB_REF#refs/*/}"
           echo "var1=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
           echo output of var1 is $var1
+          
           echo "test {GITHUB_REF/refs\/tags\//}: ${GITHUB_REF/refs\/tags\//}"
-          echo "var2=$${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
+          echo "var2=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
           echo output of var2 is $var2
           
           echo "testing cut second and thrid word between / :"
