@@ -126,15 +126,19 @@ jobs:
       - name: Test saved vars
         id: test
         env:
-          var2: ${{ steps.vars.outputs.var2 }} 
-          var3: ${{ steps.vars.outputs.var3 }}    
+          VAR2: ${{ steps.vars.outputs.var2 }} 
+          VAR3: ${{ steps.vars.outputs.var3 }}    
         run: |
           echo "var1 $var1"
           echo ${{ env.var1 }}
           echo "--------------"
-          echo "var2 $var2"
+          echo "var2 $VAR2"
           echo ${{ steps.vars.outputs.var2 }} 
           echo "--------------"
-          echo "var3 $var3"
+          echo "var3 $VAR3"
           echo ${{ steps.vars.outputs.var3 }} 
+          echo "------------"
+          echo
+          
+          
       
