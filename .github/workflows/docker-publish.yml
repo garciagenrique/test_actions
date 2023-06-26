@@ -123,18 +123,18 @@ jobs:
 #          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}_${short_sha}
 #          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}_${short_sha}
 #          rm -rf test_actions          
-        env:
-          var2: ${{ steps.vars.outputs.var2 }} 
-          var3: ${{ steps.vars.outputs.var3 }} 
       - name: Test saved vars
         id: test
+        env:
+          var2: ${{ steps.vars.outputs.var2 }} 
+          var3: ${{ steps.vars.outputs.var3 }}    
         run: |
-          echo $var1
+          echo "var1 $var1"
           echo ${{ env.var1 }}
           echo "--------------"
-          echo $var2
+          echo "var2 $var2"
           echo ${{ steps.vars.outputs.var2 }} 
           echo "--------------"
-          echo $var3
+          echo "var3 $var3"
           echo ${{ steps.vars.outputs.var3 }} 
       
