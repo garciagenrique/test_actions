@@ -78,13 +78,14 @@ jobs:
           
           echo "test {GITHUB_REF#refs/*/}: ${GITHUB_REF#refs/*/}"
           echo "var1=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-          echo output of var1 is $var1
+          echo output of var1 is "$var1"
           
           echo  "var3=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+          echo output of var3 is "$var3"
           
           echo "test {GITHUB_REF/refs\/tags\//}: ${GITHUB_REF/refs\/tags\//}"
           echo "var2=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
-          echo output of var2 is $var2
+          echo output of var2 is "$var2"
           
           echo "testing cut second and thrid word between / :"
           echo "second: ${GITHUB_REF}" | cut -d/ -f2
@@ -122,6 +123,9 @@ jobs:
 #          docker tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}_${short_sha}
 #          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${the_tag}_${short_sha}
 #          rm -rf test_actions          
+        env:
+          var2: ${{ steps.vars.outputs.var2 }} 
+          var3: ${{ steps.vars.outputs.var3 }} 
       - name: Test saved vars
         id: test
         run: |
